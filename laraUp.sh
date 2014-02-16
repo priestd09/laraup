@@ -31,7 +31,7 @@ if [ ! -d  "$(pwd)/vagrant_vbox"  ]; then
     mkdir "$(pwd)/vagrant_vbox"
 fi
 
-vagrant_dir="$(pwd)/vagrant_vbox/$(date +%s)"
+vagrant_dir="$(pwd)/vagrant_vbox/$project_name-$(date +%s)"
 mkdir $vagrant_dir
 
 cat <<EOF > $vagrant_dir/Vagrantfile

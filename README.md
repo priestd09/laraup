@@ -16,9 +16,9 @@ This Script will install Laravel PHP Framework in Local machine which is also sh
 * Clone the repository
 * Go the the cloned Directory
 * make the Bash script executable
-* > chmod +x laraUp.sh
+* `chmod +x laraUp.sh`
 * and run it
-* > ./laraUp.sh
+* `./laraUp.sh`
 
 ## What does it install?
 * Debian Wheezy (Only Supported machine at the moment)
@@ -35,6 +35,6 @@ This Script will install Laravel PHP Framework in Local machine which is also sh
 * And lots more
 
 ## Roadmap
-Support for Other Vagrant boxes and Operating systems
-Apache Vhost Config
-Some More Open Ports or ask for user Input
+* Support for Other Vagrant boxes and Operating systems
+* Apache Vhost Config
+* Some More Open Ports or ask for user Input

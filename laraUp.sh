@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Function to Check if the dependencies are satisfied
+# Unsatisfied dependencies will terminate the script with further information
 function dependency_check {
 	if [[  -z "$(which $1)"  ]]; then
 		echo -e "Unmet Dependency, please install the latest $1 from $2 \n"
@@ -13,6 +15,7 @@ dependency_check "virtualbox" "https://www.virtualbox.org/wiki/Downloads"
 dependency_check "vagrant" "http://www.vagrantup.com/downloads"
 dependency_check "git" "http://git-scm.com/downloads"
 
+# If Ruby is not installed then install the latest stable rvm
 if [[ -z "$(which ruby)" ]]; then
 	\curl -sSL https://get.rvm.io | bash -s stable
 fi
@@ -22,18 +25,23 @@ echo -e "\n All Dependencies met \n"
 echo -e "Name of your new Laravel Project" 
 read project_name
 
+# Place to install the project locally
 project_location="$(pwd)/$project_name"
 
+# The project is created in local environment which can be accessed via virtual machine
 composer create-project laravel/laravel $project_name
 chmod 777 -R $project_name
 
+# Create a separate folder to hold virtualbox image, separate than project
 if [ ! -d  "$(pwd)/vagrant_vbox"  ]; then
     mkdir "$(pwd)/vagrant_vbox"
 fi
 
+# virtualbox image name = The project name + timestamp when the script begins
 vagrant_dir="$(pwd)/vagrant_vbox/$project_name-$(date +%s)"
 mkdir $vagrant_dir
 
+# Making a Vagrantfile with relevant informations, ost notably the project share path
 cat <<EOF > $vagrant_dir/Vagrantfile
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -52,6 +60,7 @@ Vagrant.configure("2") do |config|
 end
 EOF
 
+# Setting up Nginx configuration
 cat <<EOF > $vagrant_dir/nginx_conf
 server {
 	listen 80;
@@ -124,6 +133,7 @@ server {
 }
 EOF
 
+# Bash script to run after OS Image is installed in virtual machine
 cat <<EOF > $vagrant_dir/lara_set.sh
 #!/bin/bash
 

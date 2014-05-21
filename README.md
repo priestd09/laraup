@@ -9,6 +9,7 @@ This Script will install Laravel PHP Framework in Local machine which is also sh
 ## Prerequesites
 * Vagrant
 * Virtualbox
+* Composer (installed globally)
 * Git
 * Ruby
 
